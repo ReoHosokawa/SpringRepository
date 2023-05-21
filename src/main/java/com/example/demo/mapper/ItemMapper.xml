@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ItemMapper">
+	<select id="findAll" resultType="com.example.demo.domain.Item">
+		SELECT
+			item.id,
+			mName.name,
+			item.price,
+			item.taxRate,
+			item.priceWithTax,
+			mVendor.name AS vendor
+		FROM item
+		INNER JOIN masterItemName mName ON item.nameId = mName.id
+		INNER JOIN masterVendor mVendor ON item.vendorId = mVendor.id
+	</select>
+	
+	<select id="findOne" resultType="com.example.demo.domain.Item">
+		SELECT * FROM item WHERE id = #{id}
+	</select>
+	
+	<select id="findNameIdCount" resultType="Integer">
+		SELECT COUNT(nameId) FROM item WHERE nameId = #{nameId} 
+	</select>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO item(nameId, price, taxRate, priceWithTax, vendorId)
+		VALUES(#{nameId}, #{price}, #{taxRate}, #{priceWithTax}, #{vendorId})
+	</insert>
+	
+	<update id="update">
+		UPDATE item
+		SET nameId = #{nameId},
+			price = #{price},
+			taxRate = #{taxRate},
+			priceWithTax = #{priceWithTax},
+			vendorId = #{vendorId}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM item WHERE id = #{id}
+	</delete>
+</mapper>
