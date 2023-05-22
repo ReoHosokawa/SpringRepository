@@ -49,10 +49,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("{id}/edit")
-	public String edit(
-			@PathVariable Long id,
-			@ModelAttribute("item") Item item,
-			Model model) {
+	public String edit(@PathVariable Long id, @ModelAttribute("item") Item item, Model model) {
 		model.addAttribute("item", itemService.findOne(id));
 		model.addAttribute("masterItemNames", masterItemNameService.findAll());
 		model.addAttribute("masterVendors", masterVendorService.findAll());
@@ -61,18 +58,15 @@ public class ItemController {
 	}
 	
 	@PostMapping
-	public String create(
-			@ModelAttribute("item") @Validated Item item,
-			BindingResult result,
-			Model model) {
-		final Long inputItemNameId = item.getNameId();
-		final Long inputVendorId = item.getVendorId();
+	public String create(@ModelAttribute("item") @Validated Item item, BindingResult result, Model model) {
+		final Long selectedItemNameId = item.getNameId();
+		final Long selectedVendorId = item.getVendorId();
 		
 		if (result.hasErrors()) {
 			model.addAttribute("masterItemNames", masterItemNameService.findAll());
 			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedItemNameId", inputItemNameId);
-			model.addAttribute("selectedVendorId", inputVendorId);
+			model.addAttribute("selectedItemNameId", selectedItemNameId);
+			model.addAttribute("selectedVendorId", selectedVendorId);
 			return "new";
 		}
 		
@@ -85,13 +79,13 @@ public class ItemController {
 //		}
 		
 		// 商品テーブルに入力された商品名がすでに存在するかを確認する
-		final int itemNameCount = itemService.findNameIdCount(inputItemNameId);
+		final int itemNameCount = itemService.findNameIdCount(selectedItemNameId);
 		if (itemNameCount == 1) {
 			model.addAttribute("itemNameErrorMessage", "指定された商品名はすでに登録されています。");
 			model.addAttribute("masterItemNames", masterItemNameService.findAll());
 			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedItemNameId", inputItemNameId);
-			model.addAttribute("selectedVendorId", inputVendorId);
+			model.addAttribute("selectedItemNameId", selectedItemNameId);
+			model.addAttribute("selectedVendorId", selectedVendorId);
 			return "new";
 		}
 		
@@ -108,20 +102,16 @@ public class ItemController {
 	}
 	
 	@PutMapping("{id}")
-	public String update(
-			@PathVariable Long id,
-			@ModelAttribute("item") @Validated Item item,
-			BindingResult result,
-			Model model) {
-		final Long inputItemNameId = item.getNameId();
-		final Long inputVendorId = item.getVendorId();
+	public String update(@PathVariable Long id, @ModelAttribute("item") @Validated Item item, BindingResult result, Model model) {
+		final Long selectedNameId = item.getNameId();
+		final Long selectedVendorId = item.getVendorId();
 		
 		if (result.hasErrors()) {
 			model.addAttribute("item", item);
 			model.addAttribute("masterItemNames", masterItemNameService.findAll());
 			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedItemNameId", inputItemNameId);
-			model.addAttribute("selectedVendorId", inputVendorId);
+			model.addAttribute("selectedItemNameId", selectedNameId);
+			model.addAttribute("selectedVendorId", selectedVendorId);
 			return "edit";
 		}
 		
