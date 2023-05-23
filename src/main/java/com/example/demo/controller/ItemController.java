@@ -59,18 +59,18 @@ public class ItemController {
 	
 	@PostMapping
 	public String create(@ModelAttribute("item") @Validated Item item, BindingResult result, Model model) {
-		final Long selectedItemNameId = item.getNameId();
+		final Long selectedNameId = item.getNameId();
 		final Long selectedVendorId = item.getVendorId();
 		
 		if (result.hasErrors()) {
 			model.addAttribute("masterItemNames", masterItemNameService.findAll());
 			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedItemNameId", selectedItemNameId);
+			model.addAttribute("selectedItemNameId", selectedNameId);
 			model.addAttribute("selectedVendorId", selectedVendorId);
 			return "new";
 		}
 		
-		if (selectedItemNameId == -1) {
+		if (selectedNameId == -1) {
 			model.addAttribute("itemNameErrorMessage", "商品名を選択してください。");
 			model.addAttribute("masterItemNames", masterItemNameService.findAll());
 			model.addAttribute("masterVendors", masterVendorService.findAll());
@@ -87,12 +87,12 @@ public class ItemController {
 //		}
 		
 		// 商品テーブルに入力された商品名がすでに存在するかを確認する
-		final int itemNameCount = itemService.findNameIdCount(selectedItemNameId);
+		final int itemNameCount = itemService.findNameIdCount(selectedNameId);
 		if (itemNameCount == 1) {
 			model.addAttribute("itemNameErrorMessage", "指定された商品名はすでに登録されています。");
 			model.addAttribute("masterItemNames", masterItemNameService.findAll());
 			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedItemNameId", selectedItemNameId);
+			model.addAttribute("selectedItemNameId", selectedNameId);
 			model.addAttribute("selectedVendorId", selectedVendorId);
 			return "new";
 		}
@@ -101,7 +101,7 @@ public class ItemController {
 			model.addAttribute("vendorErrorMessage", "ベンダーを選択してください。");
 			model.addAttribute("masterItemNames", masterItemNameService.findAll());
 			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedItemNameId", selectedItemNameId);
+			model.addAttribute("selectedItemNameId", selectedNameId);
 			return "new";
 		}
 		
