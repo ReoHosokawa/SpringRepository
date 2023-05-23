@@ -26,7 +26,7 @@
 	          				<label class="col-md-2 control-label">商品名</label>
 	          				<div class="col-md-10">
 								<select class="form-control" name="nameId">
-									<option value="">商品名を選択してください。</option>
+									<option value="-1">商品名を選択してください。</option>
 									<option
 										th:each="masterItemName : ${masterItemNames}"
 										th:value="${masterItemName.id}"
@@ -60,7 +60,7 @@
 	          				<label class="col-md-2 control-label">ベンダー</label>
 	          				<div class="col-md-10">
 								<select class="form-control" name="vendorId">
-									<option value="">ベンダーを選択してください。</option>
+									<option value="-1">ベンダーを選択してください。</option>
 									<option
 										th:each="masterVendor : ${masterVendors}"
 										th:value="${masterVendor.id}"

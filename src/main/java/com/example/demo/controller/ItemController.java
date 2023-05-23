@@ -70,6 +70,14 @@ public class ItemController {
 			return "new";
 		}
 		
+		if (selectedItemNameId == -1) {
+			model.addAttribute("itemNameErrorMessage", "商品名を選択してください。");
+			model.addAttribute("masterItemNames", masterItemNameService.findAll());
+			model.addAttribute("masterVendors", masterVendorService.findAll());
+			model.addAttribute("selectedVendorId", selectedVendorId);
+			return "new";
+		}
+		
 //		final String inputItemName = item.getName();
 		// 商品名マスタに登録されている商品名を指定しているか確認する
 //		final int masterNameCount = masterItemNameService.findNameCount(inputItemName);
@@ -86,6 +94,14 @@ public class ItemController {
 			model.addAttribute("masterVendors", masterVendorService.findAll());
 			model.addAttribute("selectedItemNameId", selectedItemNameId);
 			model.addAttribute("selectedVendorId", selectedVendorId);
+			return "new";
+		}
+		
+		if (selectedVendorId == -1) {
+			model.addAttribute("vendorErrorMessage", "ベンダーを選択してください。");
+			model.addAttribute("masterItemNames", masterItemNameService.findAll());
+			model.addAttribute("masterVendors", masterVendorService.findAll());
+			model.addAttribute("selectedItemNameId", selectedItemNameId);
 			return "new";
 		}
 		
@@ -115,6 +131,15 @@ public class ItemController {
 			return "edit";
 		}
 		
+		if (selectedNameId == -1) {
+			model.addAttribute("item", item);
+			model.addAttribute("itemNameErrorMessage", "商品名を選択してください。");
+			model.addAttribute("masterItemNames", masterItemNameService.findAll());
+			model.addAttribute("masterVendors", masterVendorService.findAll());
+			model.addAttribute("selectedVendorId", selectedVendorId);
+			return "edit";
+		}
+		
 //		final String inputItemName = item.getName();
 		// 商品名マスタに登録されている商品名を指定しているかチェックする
 //		final int masterNameCount = masterItemNameService.findNameCount(inputItemName);
@@ -122,6 +147,15 @@ public class ItemController {
 //			model.addAttribute("itemNameErrorMessage", "指定された商品名はマスタに登録されていません。");
 //			return "edit";
 //		}
+		
+		if (selectedVendorId == -1) {
+			model.addAttribute("item", item);
+			model.addAttribute("vendorErrorMessage", "ベンダーを選択してください。");
+			model.addAttribute("masterItemNames", masterItemNameService.findAll());
+			model.addAttribute("masterVendors", masterVendorService.findAll());
+			model.addAttribute("selectedItemNameId", selectedNameId);
+			return "edit";
+		}
 		
 		// ベンダーマスタに登録されているベンダーを指定しているかチェックする
 //		final String inputVendorName = item.getVendor();
