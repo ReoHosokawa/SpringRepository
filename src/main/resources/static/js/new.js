@@ -11,10 +11,20 @@ const appInit = () => {
 	const $priceWithTax = document.getElementById("priceWithTax");
 	
 	$taxRate.addEventListener("change", () => {
+		if ($taxRate.value === "") {
+			// 要素が空のままだとエラーになるので、空の場合は 0 をセットする
+			$taxRate.value = 0;
+		}
+		
 		const priceWithTax = CommonProcessing.calculatePriceWithTax($price, $taxRate);
 		$priceWithTax.value = priceWithTax;
 	});
 	$price.addEventListener("change", () => {
+		if ($price.value === "") {
+			// 要素が空のままだとエラーになるので、空の場合は 0 をセットする
+			$price.value = 0;
+		}
+		
 		const priceWithTax = CommonProcessing.calculatePriceWithTax($price, $taxRate);
 		$priceWithTax.value = priceWithTax;
 	});
