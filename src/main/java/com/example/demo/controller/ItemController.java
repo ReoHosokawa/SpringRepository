@@ -61,21 +61,15 @@ public class ItemController {
 	public String create(@ModelAttribute("item") @Validated Item item, BindingResult result, Model model) {
 		final Long selectedNameId = item.getNameId();
 		final Long selectedVendorId = item.getVendorId();
+		boolean isError = false;
 		
 		if (result.hasErrors()) {
-			model.addAttribute("masterItemNames", masterItemNameService.findAll());
-			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedItemNameId", selectedNameId);
-			model.addAttribute("selectedVendorId", selectedVendorId);
-			return "new";
+			isError = true;
 		}
 		
 		if (selectedNameId == -1) {
 			model.addAttribute("itemNameErrorMessage", "商品名を選択してください。");
-			model.addAttribute("masterItemNames", masterItemNameService.findAll());
-			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedVendorId", selectedVendorId);
-			return "new";
+			isError = true;
 		}
 		
 //		final String inputItemName = item.getName();
@@ -90,18 +84,19 @@ public class ItemController {
 		final int itemNameCount = itemService.findNameIdCount(selectedNameId);
 		if (itemNameCount == 1) {
 			model.addAttribute("itemNameErrorMessage", "指定された商品名はすでに登録されています。");
-			model.addAttribute("masterItemNames", masterItemNameService.findAll());
-			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedItemNameId", selectedNameId);
-			model.addAttribute("selectedVendorId", selectedVendorId);
-			return "new";
+			isError = true;
 		}
 		
 		if (selectedVendorId == -1) {
 			model.addAttribute("vendorErrorMessage", "ベンダーを選択してください。");
+			isError = true;
+		}
+		
+		if (isError) {
 			model.addAttribute("masterItemNames", masterItemNameService.findAll());
 			model.addAttribute("masterVendors", masterVendorService.findAll());
 			model.addAttribute("selectedItemNameId", selectedNameId);
+			model.addAttribute("selectedVendorId", selectedVendorId);
 			return "new";
 		}
 		
@@ -121,23 +116,15 @@ public class ItemController {
 	public String update(@PathVariable Long id, @ModelAttribute("item") @Validated Item item, BindingResult result, Model model) {
 		final Long selectedNameId = item.getNameId();
 		final Long selectedVendorId = item.getVendorId();
+		boolean isError = false;
 		
 		if (result.hasErrors()) {
-			model.addAttribute("item", item);
-			model.addAttribute("masterItemNames", masterItemNameService.findAll());
-			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedItemNameId", selectedNameId);
-			model.addAttribute("selectedVendorId", selectedVendorId);
-			return "edit";
+			isError = true;
 		}
 		
 		if (selectedNameId == -1) {
-			model.addAttribute("item", item);
 			model.addAttribute("itemNameErrorMessage", "商品名を選択してください。");
-			model.addAttribute("masterItemNames", masterItemNameService.findAll());
-			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedVendorId", selectedVendorId);
-			return "edit";
+			isError = true;
 		}
 		
 //		final String inputItemName = item.getName();
@@ -148,15 +135,6 @@ public class ItemController {
 //			return "edit";
 //		}
 		
-		if (selectedVendorId == -1) {
-			model.addAttribute("item", item);
-			model.addAttribute("vendorErrorMessage", "ベンダーを選択してください。");
-			model.addAttribute("masterItemNames", masterItemNameService.findAll());
-			model.addAttribute("masterVendors", masterVendorService.findAll());
-			model.addAttribute("selectedItemNameId", selectedNameId);
-			return "edit";
-		}
-		
 		// ベンダーマスタに登録されているベンダーを指定しているかチェックする
 //		final String inputVendorName = item.getVendor();
 //		final int vendorCount = masterVendorService.findNameCount(inputVendorName);
@@ -164,6 +142,20 @@ public class ItemController {
 //			model.addAttribute("vendorErrorMessage", "指定されたベンダーはマスタに登録されていません。");
 //			return "edit";
 //		}
+		
+		if (selectedVendorId == -1) {
+			model.addAttribute("vendorErrorMessage", "ベンダーを選択してください。");
+			isError = true;
+		}
+		
+		if (isError) {
+			model.addAttribute("item", item);
+			model.addAttribute("masterItemNames", masterItemNameService.findAll());
+			model.addAttribute("masterVendors", masterVendorService.findAll());
+			model.addAttribute("selectedItemNameId", selectedNameId);
+			model.addAttribute("selectedVendorId", selectedVendorId);
+			return "edit";
+		}
 		
 		item.setId(id);
 		itemService.update(item);
