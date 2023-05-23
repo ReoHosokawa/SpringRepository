@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/show.css" />
 	<title>商品詳細</title>
 </head>
 <body>
@@ -28,6 +29,10 @@
 		          	<div class="form-group row">
 		            	<label class="col-md-2 control-label">価格</label>
 		            	<div class="col-md-10 form-control-static" th:text="*{price}"></div>
+		          	</div>
+		          	<div class="form-group row">
+		            	<label class="col-md-2 control-label">税率</label>
+		            	<div id="tax-rate-area" class="col-md-10 form-control-static" th:text="*{taxRate}"></div>
 		          	</div>
 		          	<div class="form-group row">
 		            	<label class="col-md-2 control-label">ベンダー</label>
