@@ -1,9 +1,9 @@
-#taxRate {
+#tax-rate {
 	width: 70px;
 	display: inline;
 }
 
-#taxRateInputArea::after {
+#tax-rate-input-area::after {
 	content: "％";
 	margin-left: 10px;
 }

@@ -43,15 +43,15 @@
 	          			<label class="col-md-2 control-label">価格</label>
 	          			<div class="col-md-10">
 	            			<input class="form-control" type="text" th:field="*{price}" />
-	            			<input class="form-control" type="hidden" id="priceWithTax" name="priceWithTax" th:value="*{priceWithTax}"/>
+	            			<input class="form-control" type="hidden" id="price-with-tax" name="priceWithTax" th:value="*{priceWithTax}"/>
 	            			<div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
 	          			</div>
 	        		</div>
 	        		<div class="form-group row">
 	          			<label class="col-md-2 control-label">税率</label>
           				<div class="col-md-10">
-            				<span id="taxRateInputArea">
-								<input class="form-control" type="text" id="taxRate" name="taxRate" th:value="*{taxRate}"/>
+            				<span id="tax-rate-input-area">
+								<input class="form-control" type="text" id="tax-rate" name="taxRate" th:value="*{taxRate}"/>
             				</span>
             				<div class="text-danger" th:if="${#fields.hasErrors('taxRate')}" th:errors="*{taxRate}"></div>
           				</div>

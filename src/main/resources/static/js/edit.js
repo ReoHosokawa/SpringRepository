@@ -6,9 +6,9 @@ const appInit = () => {
 	/** @type {HTMLInputElement} */
 	const $price = document.getElementById("price");
 	/** @type {HTMLInputElement} */
-	const $taxRate = document.getElementById("taxRate");
+	const $taxRate = document.getElementById("tax-rate");
 	/** @type {HTMLInputElement} */
-	const $priceWithTax = document.getElementById("priceWithTax");
+	const $priceWithTax = document.getElementById("price-with-tax");
 	
 	$taxRate.addEventListener("change", () => {
 		if ($taxRate.value === "") {

@@ -1,10 +1,10 @@
-#taxRate {
+#tax-rate {
 	width: 70px;
 	text-align: center;
 	display: inline;
 }
 
-#taxRateInputArea::after {
+#tax-rate-input-area::after {
 	content: "％";
 	margin-left: 10px;
 }
