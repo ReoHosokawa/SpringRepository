@@ -15,7 +15,19 @@
 	</select>
 	
 	<select id="findOne" resultType="com.example.demo.domain.Item">
-		SELECT * FROM item WHERE id = #{id}
+		SELECT
+			item.id,
+			item.nameId,
+			mName.name,
+			item.price,
+			item.taxRate,
+			item.priceWithTax,
+			item.vendorId,
+			mVendor.name AS vendor
+		FROM item
+		INNER JOIN masterItemName mName ON item.nameId = mName.id
+		INNER JOIN masterVendor mVendor ON item.vendorId = mVendor.id
+		WHERE item.id = #{id}
 	</select>
 	
 	<select id="findNameIdCount" resultType="Integer">
