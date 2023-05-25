@@ -67,10 +67,21 @@ public class ItemController {
 			isError = true;
 		}
 		
-		if (selectedNameId == -1) {
-			model.addAttribute("itemNameErrorMessage", "商品名を選択してください。");
-			isError = true;
-		}
+		do {
+			if (selectedNameId == -1) {
+				model.addAttribute("itemNameErrorMessage", "商品名を選択してください。");
+				isError = true;
+				break;
+			}
+			
+			// 商品名が選択されている場合、商品テーブルに入力された商品名がすでに存在するかを確認する
+			final int itemNameCount = itemService.findNameIdCount(selectedNameId);
+			if (itemNameCount == 1) {
+				model.addAttribute("itemNameErrorMessage", "指定された商品名はすでに登録されています。");
+				isError = true;
+				break;
+			}
+		} while (false);
 		
 //		final String inputItemName = item.getName();
 		// 商品名マスタに登録されている商品名を指定しているか確認する
@@ -79,13 +90,6 @@ public class ItemController {
 //			model.addAttribute("itemNameErrorMessage", "指定された商品名はマスタに登録されていません。");
 //			return "new";
 //		}
-		
-		// 商品テーブルに入力された商品名がすでに存在するかを確認する
-		final int itemNameCount = itemService.findNameIdCount(selectedNameId);
-		if (itemNameCount == 1) {
-			model.addAttribute("itemNameErrorMessage", "指定された商品名はすでに登録されています。");
-			isError = true;
-		}
 		
 		if (selectedVendorId == -1) {
 			model.addAttribute("vendorErrorMessage", "ベンダーを選択してください。");
