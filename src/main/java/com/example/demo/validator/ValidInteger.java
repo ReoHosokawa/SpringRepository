@@ -10,12 +10,15 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Documented
-@Target(value = {ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE})
+@Target(value = { ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {com.example.demo.validator.ValidIntegerValidator.class})
+@Constraint(validatedBy = { com.example.demo.validator.ValidIntegerValidator.class })
 public @interface ValidInteger {
 	String message() default "{message}";
+
 	int[] values();
+
 	Class<?>[] groups() default {};
+
 	Class<? extends Payload>[] payload() default {};
 }

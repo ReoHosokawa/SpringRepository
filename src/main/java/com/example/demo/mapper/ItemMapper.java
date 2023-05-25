@@ -9,14 +9,14 @@ import com.example.demo.domain.Item;
 @Mapper
 public interface ItemMapper {
 	List<Item> findAll();
-	
+
 	Item findOne(Long id);
-	
+
 	int findNameIdCount(Long nameId);
-	
+
 	void save(Item item);
-	
+
 	void update(Item item);
-	
+
 	void delete(Long id);
 }

@@ -6,12 +6,12 @@ import javax.validation.ConstraintValidatorContext;
 public class ValidIntegerValidator implements ConstraintValidator<ValidInteger, Integer> {
 
 	private int[] values;
-	
+
 	@Override
 	public void initialize(ValidInteger validValue) {
 		this.values = validValue.values();
 	}
-	
+
 	@Override
 	public boolean isValid(final Integer targetValue, ConstraintValidatorContext context) {
 		for (final int value : values) {
@@ -19,7 +19,7 @@ public class ValidIntegerValidator implements ConstraintValidator<ValidInteger, 
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 }

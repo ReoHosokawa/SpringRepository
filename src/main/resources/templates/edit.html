@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +8,7 @@
 	<link rel="stylesheet" href="/css/edit.css" />
 	<title>商品情報変更</title>
 </head>
+
 <body>
 	<nav class="navbar navbar-inverse">
 		<div class="container">
@@ -14,72 +16,69 @@
 				<a class="navbar-brand" href="/items">商品管理デモ</a>
 			</div>
 		</div>
-    </nav>
+	</nav>
 	<div class="container">
 		<div class="card card-primary mb-3">
-  			<div class="card-header">
-  				<h5 class="card-title">商品詳細</h5>
-  			</div>
+			<div class="card-header">
+				<h5 class="card-title">商品詳細</h5>
+			</div>
 			<div class="card-body">
 				<form th:action="@{/items/{id}(id=*{id})}" th:method="put" th:object="${item}">
-	        		<div class="form-group row">
-	          			<label class="col-md-2 control-label">商品名</label>
-	          			<div class="col-md-10">
+					<div class="form-group row">
+						<label class="col-md-2 control-label">商品名</label>
+						<div class="col-md-10">
 							<select class="form-control" name="nameId">
 								<option value="-1">商品名を選択してください。</option>
-								<option
-									th:each="masterItemName : ${masterItemNames}"
-									th:value="${masterItemName.id}"
+								<option th:each="masterItemName : ${masterItemNames}" th:value="${masterItemName.id}"
 									th:text="${masterItemName.name}"
-									th:selected="${masterItemName.id == item.getNameId()}"
-								></option>
+									th:selected="${masterItemName.id == item.getNameId()}"></option>
 							</select>
-	            			<!--<input class="form-control" type="text" th:field="*{name}" />
+							<!--<input class="form-control" type="text" th:field="*{name}" />
 	            			<div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>-->
-	            			<div class="text-danger" th:text="${itemNameErrorMessage}"></div>
-	          			</div>
-	        		</div>
-	        		<div class="form-group row">
-	          			<label class="col-md-2 control-label">価格</label>
-	          			<div class="col-md-10">
-	            			<input class="form-control" type="text" th:field="*{price}" />
-	            			<input class="form-control" type="hidden" id="price-with-tax" name="priceWithTax" th:value="*{priceWithTax}"/>
-	            			<div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
-	          			</div>
-	        		</div>
-	        		<div class="form-group row">
-	          			<label class="col-md-2 control-label">税率</label>
-          				<div class="col-md-10">
-            				<span id="tax-rate-input-area">
-								<input class="form-control" type="text" id="tax-rate" name="taxRate" th:value="*{taxRate}"/>
-            				</span>
-            				<div class="text-danger" th:if="${#fields.hasErrors('taxRate')}" th:errors="*{taxRate}"></div>
-          				</div>
-        			</div>
-	        		<div class="form-group row">
-	          			<label class="col-md-2 control-label">ベンダー</label>
-	          			<div class="col-md-10">
+							<div class="text-danger" th:text="${itemNameErrorMessage}"></div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 control-label">価格</label>
+						<div class="col-md-10">
+							<input class="form-control" type="text" th:field="*{price}" />
+							<input class="form-control" type="hidden" id="price-with-tax" name="priceWithTax"
+								th:value="*{priceWithTax}" />
+							<div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 control-label">税率</label>
+						<div class="col-md-10">
+							<span id="tax-rate-input-area">
+								<input class="form-control" type="text" id="tax-rate" name="taxRate"
+									th:value="*{taxRate}" />
+							</span>
+							<div class="text-danger" th:if="${#fields.hasErrors('taxRate')}" th:errors="*{taxRate}">
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 control-label">ベンダー</label>
+						<div class="col-md-10">
 							<select class="form-control" name="vendorId">
 								<option value="-1">ベンダーを選択してください。</option>
-								<option
-									th:each="masterVendor : ${masterVendors}"
-									th:value="${masterVendor.id}"
+								<option th:each="masterVendor : ${masterVendors}" th:value="${masterVendor.id}"
 									th:text="${masterVendor.name}"
-									th:selected="${masterVendor.id == item.getVendorId()}"
-								></option>
+									th:selected="${masterVendor.id == item.getVendorId()}"></option>
 							</select>
-	            			<!--<input class="form-control" type="text" th:field="*{vendor}" />
+							<!--<input class="form-control" type="text" th:field="*{vendor}" />
 	            			<div class="text-danger" th:if="${#fields.hasErrors('vendor')}" th:errors="*{vendor}"></div>-->
-	            			<div class="text-danger" th:text="${vendorErrorMessage}"></div>
-	          			</div>
-	        		</div>
-	        		<div class="form-group row">
-	          			<div class="offset-md-2 col-md-9">
-	            			<button class="btn btn-primary">更新</button>
-	            		</div>
-	          		</div>
-	        	</div>
-	      	</form>
+							<div class="text-danger" th:text="${vendorErrorMessage}"></div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="offset-md-2 col-md-9">
+							<button class="btn btn-primary">更新</button>
+						</div>
+					</div>
+			</div>
+			</form>
 		</div>
 	</div>
 	<script src="/js/jquery-3.4.1.min"></script>
@@ -87,4 +86,5 @@
 	<script src="/js/common_processing.js"></script>
 	<script src="/js/edit.js"></script>
 </body>
+
 </html>

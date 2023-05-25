@@ -24,7 +24,7 @@ public class ItemService {
 	public Item findOne(Long id) {
 		return itemMapper.findOne(id);
 	}
-	
+
 	@Transactional
 	public int findNameIdCount(Long nameId) {
 		return itemMapper.findNameIdCount(nameId);

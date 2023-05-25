@@ -4,12 +4,12 @@
 	<select id="findAll" resultType="com.example.demo.domain.MasterVendor">
 		SELECT * FROM masterVendor
 	</select>
-	
+
 	<select id="findOne" resultType="com.example.demo.domain.MasterVendor">
 		SELECT * FROM masterVendor WHERE id= #{id}
 	</select>
-	
+
 	<select id="findNameCount" resultType="Integer">
-		SELECT COUNT(name) FROM masterVendor WHERE name = #{name} 
+		SELECT COUNT(name) FROM masterVendor WHERE name = #{name}
 	</select>
 </mapper>

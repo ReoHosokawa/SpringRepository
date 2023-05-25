@@ -14,17 +14,17 @@ public class MasterItemNameService {
 
 	@Autowired
 	private MasterItemNameMapper masterItemNameMapper;
-	
+
 	@Transactional
 	public List<MasterItemName> findAll() {
 		return masterItemNameMapper.findAll();
 	}
-	
+
 	@Transactional
 	public MasterItemName findOne(Long id) {
 		return masterItemNameMapper.findOne(id);
 	}
-	
+
 	@Transactional
 	public int findNameCount(String name) {
 		return masterItemNameMapper.findNameCount(name);

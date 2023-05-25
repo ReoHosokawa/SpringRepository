@@ -14,17 +14,17 @@ public class MasterVendorService {
 
 	@Autowired
 	private MasterVendorMapper masterVendorMapper;
-	
+
 	@Transactional
 	public List<MasterVendor> findAll() {
 		return masterVendorMapper.findAll();
 	}
-	
+
 	@Transactional
 	public MasterVendor findOne(Long id) {
 		return masterVendorMapper.findOne(id);
 	}
-	
+
 	@Transactional
 	public int findNameCount(String name) {
 		return masterVendorMapper.findNameCount(name);

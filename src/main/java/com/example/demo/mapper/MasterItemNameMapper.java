@@ -9,8 +9,8 @@ import com.example.demo.domain.MasterItemName;
 @Mapper
 public interface MasterItemNameMapper {
 	List<MasterItemName> findAll();
-	
+
 	MasterItemName findOne(Long id);
-	
+
 	int findNameCount(String name);
 }
