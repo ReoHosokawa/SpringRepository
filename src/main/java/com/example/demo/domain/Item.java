@@ -10,7 +10,6 @@ public class Item {
 
 	private Long nameId;
 
-//	@NotBlank(message = "商品名を入力してください。")
 	private String name;
 
 	@Min(value = 10, message = "10以上の数値を入力してください。")
@@ -24,8 +23,6 @@ public class Item {
 
 	private Long vendorId;
 
-//	@NotBlank(message = "ベンダーを入力してください。")
-//	@Size(max = 50, message = "ベンダーは50文字以内で入力してください。")
 	private String vendor;
 
 	public Long getId() {
