@@ -50,7 +50,11 @@ public class ItemController {
 
 	@GetMapping("{id}/edit")
 	public String edit(@PathVariable Long id, @ModelAttribute("item") Item item, Model model) {
-		model.addAttribute("item", itemService.findOne(id));
+		Item targetItem = itemService.findOne(id);
+		// 編集後の更新前チェック時に商品名が変更されているか確認できるように oldNameId に現在の nameId をセットする
+		targetItem.setOldNameId(targetItem.getNameId());
+
+		model.addAttribute("item", targetItem);
 		model.addAttribute("masterItemNames", masterItemNameService.findAll());
 		model.addAttribute("masterVendors", masterVendorService.findAll());
 		return "edit";
@@ -110,10 +114,25 @@ public class ItemController {
 			isError = true;
 		}
 
-		if (selectedNameId == -1) {
-			model.addAttribute("itemNameErrorMessage", "商品名を選択してください。");
-			isError = true;
-		}
+		do {
+			if (selectedNameId == -1) {
+				model.addAttribute("itemNameErrorMessage", "商品名を選択してください。");
+				isError = true;
+				break;
+			}
+
+			if (selectedNameId == item.getOldNameId()) {
+				// 商品が変更されていない場合は重複チェックを実施しない
+				break;
+			}
+
+			int itemNameCount = itemService.findNameIdCount(selectedNameId);
+			if (itemNameCount == 1) {
+				model.addAttribute("itemNameErrorMessage", "指定された商品名はすでに登録されています。");
+				isError = true;
+				break;
+			}
+		} while (false);
 
 		if (selectedVendorId == -1) {
 			model.addAttribute("vendorErrorMessage", "ベンダーを選択してください。");
