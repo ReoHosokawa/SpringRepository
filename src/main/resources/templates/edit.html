@@ -33,6 +33,7 @@
 									th:text="${masterItemName.name}"
 									th:selected="${masterItemName.id == item.getNameId()}"></option>
 							</select>
+							<input type="hidden" name="oldNameId" th:field="*{oldNameId}">
 							<div class="text-danger" th:text="${itemNameErrorMessage}"></div>
 						</div>
 					</div>
