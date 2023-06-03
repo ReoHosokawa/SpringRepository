@@ -10,6 +10,8 @@ public class Item {
 
 	private Long nameId;
 
+	private Long oldNameId;
+
 	private String name;
 
 	@Min(value = 10, message = "10以上の数値を入力してください。")
@@ -39,6 +41,14 @@ public class Item {
 
 	public void setNameId(Long nameId) {
 		this.nameId = nameId;
+	}
+
+	public Long getOldNameId() {
+		return oldNameId;
+	}
+
+	public void setOldNameId(Long oldNameId) {
+		this.oldNameId = oldNameId;
 	}
 
 	public String getName() {
