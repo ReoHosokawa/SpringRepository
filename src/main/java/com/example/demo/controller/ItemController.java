@@ -53,7 +53,6 @@ public class ItemController {
 		model.addAttribute("item", itemService.findOne(id));
 		model.addAttribute("masterItemNames", masterItemNameService.findAll());
 		model.addAttribute("masterVendors", masterVendorService.findAll());
-		model.addAttribute("oldItemNameId", item.getNameId());
 		return "edit";
 	}
 
@@ -83,14 +82,6 @@ public class ItemController {
 			}
 		} while (false);
 
-//		final String inputItemName = item.getName();
-		// 商品名マスタに登録されている商品名を指定しているか確認する
-//		final int masterNameCount = masterItemNameService.findNameCount(inputItemName);
-//		if (masterNameCount == 0) {
-//			model.addAttribute("itemNameErrorMessage", "指定された商品名はマスタに登録されていません。");
-//			return "new";
-//		}
-
 		if (selectedVendorId == -1) {
 			model.addAttribute("vendorErrorMessage", "ベンダーを選択してください。");
 			isError = true;
@@ -103,14 +94,6 @@ public class ItemController {
 			model.addAttribute("selectedVendorId", selectedVendorId);
 			return "new";
 		}
-
-		// ベンダーマスタに登録されているベンダーを指定しているか確認する
-//		final String inputVendorName = item.getVendor();
-//		final int vendorCount = masterVendorService.findNameCount(inputVendorName);
-//		if (vendorCount == 0) {
-//			model.addAttribute("vendorErrorMessage", "指定されたベンダーはマスタに登録されていません。");
-//			return "new";
-//		}
 
 		itemService.save(item);
 		return "redirect:/items";
@@ -131,22 +114,6 @@ public class ItemController {
 			model.addAttribute("itemNameErrorMessage", "商品名を選択してください。");
 			isError = true;
 		}
-
-//		final String inputItemName = item.getName();
-		// 商品名マスタに登録されている商品名を指定しているかチェックする
-//		final int masterNameCount = masterItemNameService.findNameCount(inputItemName);
-//		if (masterNameCount == 0) {
-//			model.addAttribute("itemNameErrorMessage", "指定された商品名はマスタに登録されていません。");
-//			return "edit";
-//		}
-
-		// ベンダーマスタに登録されているベンダーを指定しているかチェックする
-//		final String inputVendorName = item.getVendor();
-//		final int vendorCount = masterVendorService.findNameCount(inputVendorName);
-//		if (vendorCount == 0) {
-//			model.addAttribute("vendorErrorMessage", "指定されたベンダーはマスタに登録されていません。");
-//			return "edit";
-//		}
 
 		if (selectedVendorId == -1) {
 			model.addAttribute("vendorErrorMessage", "ベンダーを選択してください。");
