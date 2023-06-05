@@ -1,0 +1,27 @@
+#container {
+    width: 50%;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 0;
+    background-color: lightblue;
+    border-radius: 20px;
+}
+
+#loginErrorMessageArea {
+	text-align: center;
+}
+
+.title-area,
+.button-area {
+	text-align: center;
+}
+
+.input-area {
+    margin: 20px 0;
+    padding: 0 30px;
+}
+
+.button-area {
+    margin-top: 40px;
+}
