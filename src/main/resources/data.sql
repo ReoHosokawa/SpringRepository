@@ -111,4 +111,9 @@ VALUES
 	('株式会社セーニャ'),
 	('コカ・コーラ　カスタマーマーケティング');
 	
-	
+-- ユーザマスタのデータ
+INSERT INTO masterUser (id, name, password)
+VALUES
+	('hosokawa', '細川', 'sample1'),
+	('leaf', 'リーフ', 'sample2'),
+	('yuzukko', 'ゆずっこ', 'sample3');
