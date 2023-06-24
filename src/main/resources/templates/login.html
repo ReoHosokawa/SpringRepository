@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>ログイン</title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 	<link rel="stylesheet" href="/css/login.css">
 </head>
 
@@ -15,7 +16,7 @@
 		<div class="title-area">
 			<h1>商品管理システム</h1>
 		</div>
-		
+
 		<div id="loginErrorMessageArea" class="text-danger" th:text="${loginErrorMessage}"></div>
 
 		<form th:action="@{/login}" th:method="post" th:object="${masterUser}">
@@ -26,7 +27,10 @@
 			</div>
 			<div class="form-group input-area">
 				<label>パスワード</label>
-				<input type="password" class="form-control" name="password" id="password" th:value="*{password}">
+				<div class="form-control input-password-area">
+					<input type="password" name="password" id="password" th:value="*{password}">
+					<span id="buttonEye" class="fa fa-eye"></span>
+				</div>
 				<div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 			</div>
 			<div class="button-area">
@@ -36,6 +40,7 @@
 	</div>
 	<script src="/js/jquery-3.4.1.min"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/login.js"></script>
 </body>
 
 </html>

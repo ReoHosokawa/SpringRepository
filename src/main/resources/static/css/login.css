@@ -1,3 +1,9 @@
+@media (any-hover: hover) {
+	#buttonEye:hover {
+		opacity: 0.7;
+	}
+}
+
 #container {
     width: 50%;
     margin-top: 30px;
@@ -20,6 +26,18 @@
 .input-area {
     margin: 20px 0;
     padding: 0 30px;
+}
+
+.input-password-area {
+	display: flex;
+	align-items: center;
+}
+
+#password {
+	border: none;
+	flex: 1;
+	outline: none;
+	appearance: none;
 }
 
 .button-area {
